@@ -1,0 +1,23 @@
+{
+  "name": "bootnext",
+  "version": "1.0.0",
+  "description": "GNOME Shell extension to temporarily reboot into another OS using efibootmgr BootNext",
+  "type": "module",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/example/bootnext.git"
+  },
+  "author": "BootNext",
+  "license": "GPL-3.0-only",
+  "sideEffects": false,
+  "devDependencies": {
+    "eslint": "^10.4.0",
+    "eslint-plugin-jsdoc": "^62.9.0",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "@girs/gjs": "^4.0.0-rc.15",
+    "@girs/gnome-shell": "^50.0.0"
+  }
+}

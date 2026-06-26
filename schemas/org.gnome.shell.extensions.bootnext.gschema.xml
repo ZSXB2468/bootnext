@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.bootnext" path="/org/gnome/shell/extensions/bootnext/">
+    <key name="blacklist" type="as">
+      <default>[]</default>
+      <summary>Blacklist</summary>
+      <description>Which boot entries to hide from the menu</description>
+    </key>
+    <key name="show-uefi" type="b">
+      <default>true</default>
+      <summary>Show UEFI Firmware entry</summary>
+      <description>Whether to show the "UEFI Firmware Setup" entry in the menu</description>
+    </key>
+  </schema>
+</schemalist>
