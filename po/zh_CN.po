@@ -1,66 +1,65 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Chinese (Simplified) translation for bootnext GNOME Shell extension.
+# Copyright (C) 2024 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: bootnext\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-01-01 00:00+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2024-01-01 00:00+0800\n"
+"Last-Translator: \n"
+"Language-Team: Chinese (Simplified)\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/extension.ts
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #: src/extension.ts
 msgid "Restart Now"
-msgstr ""
+msgstr "立即重启"
 
 #: src/extension.ts
 msgid "Restart to %s"
-msgstr ""
+msgstr "重启到 %s"
 
 #: src/extension.ts
 msgid "The system will restart automatically in %d seconds."
-msgstr ""
+msgstr "系统将在 %d 秒后自动重启。"
 
 #: src/extension.ts
 msgid "UEFI Firmware Setup"
-msgstr ""
+msgstr "UEFI 固件设置"
 
 #: src/extension.ts
 msgid "(No EFI boot entries found)"
-msgstr ""
+msgstr "（未找到 EFI 启动项）"
 
 #: src/extension.ts
 msgid "Restart to…"
-msgstr ""
+msgstr "重启到…"
 
 #: src/prefs.ts
 msgid "General"
-msgstr ""
+msgstr "常规"
 
 #: src/prefs.ts
 msgid "Blacklist"
-msgstr ""
+msgstr "黑名单"
 
 #: src/prefs.ts
 msgid "Hide boot entries from the menu"
-msgstr ""
+msgstr "在菜单中隐藏启动项"
 
 #: src/prefs.ts
 msgid "No EFI boot entries found"
-msgstr ""
+msgstr "未找到 EFI 启动项"
 
 #: src/prefs.ts
 msgid "Make sure efibootmgr is installed."
-msgstr ""
+msgstr "请确认已安装 efibootmgr。"

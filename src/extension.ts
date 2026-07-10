@@ -31,6 +31,8 @@ import {
   gettext as _,
 } from 'resource:///org/gnome/shell/extensions/extension.js';
 
+import { getBootEntries } from './efi.js';
+
 /**
  * DBus proxy wrapper for logind's Manager interface.
  * Provides SetRebootToFirmwareSetup and Reboot methods.
@@ -46,48 +48,6 @@ const ManagerInterface: string = `<node>
   </interface>
 </node>`;
 const Manager = Gio.DBusProxy.makeProxyWrapper(ManagerInterface);
-
-/**
- * Parse the output of `efibootmgr` to extract boot entries.
- * Returns a Map of BootNNNN → label.
- */
-async function getBootEntries(): Promise<Map<string, string>> {
-  const proc = Gio.Subprocess.new(
-    ['efibootmgr'],
-    Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE,
-  );
-
-  const [, stdout, stderr] = await new Promise<
-    [Gio.Subprocess, string, string]
-  >((resolve, reject) => {
-    proc.communicate_utf8_async(null, null, (_proc, result) => {
-      try {
-        if (!_proc) {
-          reject(new Error('Subprocess is null'));
-          return;
-        }
-        const [ok, outStr, errStr] = _proc.communicate_utf8_finish(result);
-        resolve([_proc, outStr, errStr]);
-      } catch (e) {
-        reject(e);
-      }
-    });
-  });
-
-  if (!proc.get_successful()) {
-    throw new Error(`efibootmgr failed: ${stderr}`);
-  }
-
-  const entries = new Map<string, string>();
-  const regex = /Boot([0-9A-Fa-f]{4})\*?\s+(.+)/g;
-  let match: RegExpExecArray | null;
-  while ((match = regex.exec(stdout)) !== null) {
-    const id = match[1];
-    const label = match[2].trim();
-    entries.set(id, label);
-  }
-  return entries;
-}
 
 /**
  * Set the BootNext EFI variable and reboot the system.
@@ -270,10 +230,11 @@ export default class BootNextExtension extends Extension {
     // Add EFI boot entries
     try {
       const bootEntries = await getBootEntries();
-      for (const [id, name] of bootEntries.entries()) {
-        if (!blacklist.includes(name)) {
-          this.menuItem.menu.addAction(name, () => {
-            const dialog = buildConfirmDialog(name, () => {
+      for (const [id, entry] of bootEntries.entries()) {
+        // Use short name for menu display and blacklist matching
+        if (!blacklist.includes(entry.name)) {
+          this.menuItem.menu.addAction(entry.name, () => {
+            const dialog = buildConfirmDialog(entry.name, () => {
               setBootNextAndReboot(id).catch((e: any) => {
                 logError(e, `BootNext: setBootNextAndReboot(${id}) failed`);
               });

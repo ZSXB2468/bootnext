@@ -2,7 +2,7 @@ NAME=bootnext
 DOMAIN=local
 BRANCH=$(shell git rev-parse --abbrev-ref HEAD)
 
-.PHONY: all pack install clean
+.PHONY: all pack install clean compile-po
 
 all: dist/extension.js
 
@@ -12,8 +12,9 @@ node_modules: package.json
 dist/extension.js: node_modules
 	@ ./node_modules/typescript/bin/tsc
 
-compile-po: po/*.po
+compile-po:
 	@for file in po/*.po; do \
+		[ -f "$$file" ] || continue; \
 		mkdir -p dist/locale/$$(basename $$file .po)/LC_MESSAGES; \
 		msgfmt -o dist/locale/$$(basename $$file .po)/LC_MESSAGES/$(NAME)@$(DOMAIN).mo $$file; \
 	done

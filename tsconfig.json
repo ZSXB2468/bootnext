@@ -11,5 +11,5 @@
     "skipLibCheck": true
   },
   "include": ["ambient.d.ts"],
-  "files": ["src/extension.ts"]
+  "files": ["src/extension.ts", "src/prefs.ts"]
 }
