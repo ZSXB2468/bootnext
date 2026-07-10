@@ -201,6 +201,8 @@ export default class BootNextExtension extends Extension {
   private menuItem: PopupMenu.PopupSubMenuMenuItem | null = null;
   private sourceId: number | null = null;
   private settings: Gio.Settings | null = null;
+  private signalBlacklistId: number | null = null;
+  private signalUefiId: number | null = null;
 
   constructor(metadata: any) {
     super(metadata);
@@ -296,17 +298,32 @@ export default class BootNextExtension extends Extension {
     }
 
     // Listen for settings changes
-    this.settings.connect('changed::blacklist', () => {
-      this.updateMenuEntries();
-    });
-    this.settings.connect('changed::show-uefi', () => {
-      this.updateMenuEntries();
-    });
+    this.signalBlacklistId = this.settings.connect(
+      'changed::blacklist',
+      () => {
+        this.updateMenuEntries();
+      },
+    );
+    this.signalUefiId = this.settings.connect(
+      'changed::show-uefi',
+      () => {
+        this.updateMenuEntries();
+      },
+    );
   }
 
   disable(): void {
     this.menuItem?.destroy();
     this.menuItem = null;
+
+    if (this.signalBlacklistId !== null && this.settings) {
+      this.settings.disconnect(this.signalBlacklistId);
+      this.signalBlacklistId = null;
+    }
+    if (this.signalUefiId !== null && this.settings) {
+      this.settings.disconnect(this.signalUefiId);
+      this.signalUefiId = null;
+    }
     this.settings = null;
 
     if (this.sourceId) {
