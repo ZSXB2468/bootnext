@@ -2,7 +2,7 @@ NAME=bootnext
 DOMAIN=local
 BRANCH=$(shell git rev-parse --abbrev-ref HEAD)
 
-.PHONY: all pack install clean compile-po
+.PHONY: all pack install install-manual clean compile-po
 
 all: dist/extension.js
 
@@ -28,12 +28,19 @@ $(NAME)@$(DOMAIN).zip: dist/extension.js
 pack: $(NAME)@$(DOMAIN).zip
 
 install: $(NAME)@$(DOMAIN).zip
+	@ZIP=$$(ls -t $(NAME)@$(DOMAIN)-*.zip 2>/dev/null | head -1); \
+	gnome-extensions install --force "$$ZIP" 2>/dev/null && \
+		echo "Extension installed & loaded (gnome-extensions)." || \
+		echo "gnome-extensions failed. Try: make install-manual"
+	@glib-compile-schemas ~/.local/share/gnome-shell/extensions/$(NAME)@$(DOMAIN)/schemas/ 2>/dev/null || true
+
+install-manual: $(NAME)@$(DOMAIN).zip
 	@[ -d ~/.local/share/gnome-shell/extensions ] || mkdir -p ~/.local/share/gnome-shell/extensions
 	@touch ~/.local/share/gnome-shell/extensions/$(NAME)@$(DOMAIN)
 	@rm -rf ~/.local/share/gnome-shell/extensions/$(NAME)@$(DOMAIN)
 	@mv dist ~/.local/share/gnome-shell/extensions/$(NAME)@$(DOMAIN)
 	@glib-compile-schemas ~/.local/share/gnome-shell/extensions/$(NAME)@$(DOMAIN)/schemas/ 2>/dev/null || true
-	@echo "Extension installed. Restart GNOME Shell (Alt+F2, r) to activate."
+	@echo "Extension installed (manual). Restart GNOME Shell (Alt+F2, r) to activate."
 
 clean:
 	@rm -rf dist node_modules $(NAME)@$(DOMAIN)-*.zip
