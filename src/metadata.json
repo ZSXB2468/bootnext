@@ -1,9 +1,9 @@
 {
   "name": "BootNext",
-  "description": "Temporarily reboot into another OS using efibootmgr BootNext — ideal for multi-boot setups",
+  "description": "One-click temporary boot selection for your next restart — a GNOME extension for multi-boot users.",
   "license": "GPLv3",
   "uuid": "bootnext@local",
-  "url": "https://github.com/example/bootnext",
+  "url": "https://github.com/ZSXB2468/bootnext",
   "shell-version": ["45", "46", "47", "48", "49", "50"],
   "gettext-domain": "bootnext@local",
   "settings-schema": "org.gnome.shell.extensions.bootnext"
