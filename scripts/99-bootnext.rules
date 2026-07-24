@@ -1,0 +1,24 @@
+// Allow efibootmgr --bootnext without authentication.
+// BootNext sets the EFI BootNext variable for a one-time boot override —
+// this is safe (non-persistent) and does not modify permanent boot order.
+//
+// Install to: /usr/share/polkit-1/rules.d/99-bootnext.rules
+//              (or /etc/polkit-1/rules.d/99-bootnext.rules)
+polkit.addRule(function (action, subject) {
+    if (action.id !== "org.freedesktop.policykit.exec") {
+        return polkit.Result.NOT_HANDLED;
+    }
+
+    // Only allow for local active sessions
+    if (!subject.local || !subject.active) {
+        return polkit.Result.NOT_HANDLED;
+    }
+
+    // Match: pkexec efibootmgr --bootnext <XXXX>
+    const cmdline = action.lookup("command_line");
+    if (cmdline && /^(\/usr\/(s?bin\/)?)?efibootmgr +--bootnext +[0-9A-Fa-f]{4}$/.test(cmdline)) {
+        return polkit.Result.YES;
+    }
+
+    return polkit.Result.NOT_HANDLED;
+});

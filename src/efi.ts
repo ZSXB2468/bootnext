@@ -1,10 +1,18 @@
 import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
 
 export interface BootEntry {
   /** Short display name (before the first tab in efibootmgr output). */
   name: string;
   /** Full description including device path, suitable for settings page. */
   full: string;
+}
+
+/**
+ * Check whether the efibootmgr binary is available on this system.
+ */
+export function checkEfibootmgr(): boolean {
+  return GLib.find_program_in_path('efibootmgr') !== null;
 }
 
 /**

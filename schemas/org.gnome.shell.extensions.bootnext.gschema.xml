@@ -11,5 +11,10 @@
       <summary>Show UEFI Firmware entry</summary>
       <description>Whether to show the "UEFI Firmware Setup" entry in the menu</description>
     </key>
+    <key name="polkit-rule-installed" type="b">
+      <default>false</default>
+      <summary>Polkit rule installed</summary>
+      <description>Tracks whether the password-less polkit rule is installed</description>
+    </key>
   </schema>
 </schemalist>

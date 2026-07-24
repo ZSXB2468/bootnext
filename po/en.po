@@ -37,12 +37,20 @@ msgid "UEFI Firmware Setup"
 msgstr "UEFI Firmware Setup"
 
 #: src/extension.ts
-msgid "(No EFI boot entries found)"
-msgstr "(No EFI boot entries found)"
+msgid "No boot entries"
+msgstr "No boot entries"
+
+#: src/extension.ts
+msgid "efibootmgr error"
+msgstr "efibootmgr error"
 
 #: src/extension.ts
 msgid "Restart to…"
 msgstr "Restart to…"
+
+#: src/extension.ts
+msgid "efibootmgr not found"
+msgstr "efibootmgr not found"
 
 #: src/prefs.ts
 msgid "General"
@@ -57,9 +65,21 @@ msgid "Hide boot entries from the menu"
 msgstr "Hide boot entries from the menu"
 
 #: src/prefs.ts
-msgid "No EFI boot entries found"
-msgstr "No EFI boot entries found"
+msgid "Failed to list boot entries"
+msgstr "Failed to list boot entries"
 
 #: src/prefs.ts
-msgid "Make sure efibootmgr is installed."
-msgstr "Make sure efibootmgr is installed."
+msgid "Could not read EFI boot entries. Check permissions or run efibootmgr manually."
+msgstr "Could not read EFI boot entries. Check permissions or run efibootmgr manually."
+
+#: src/prefs.ts
+msgid "Password-less Reboot"
+msgstr "Password-less Reboot"
+
+#: src/prefs.ts
+msgid "Skip the password prompt when switching OS. Installs a polkit rule that allows efibootmgr --bootnext without authentication."
+msgstr "Skip the password prompt when switching OS. Installs a polkit rule that allows efibootmgr --bootnext without authentication."
+
+#: src/prefs.ts
+msgid "Enable Password-less Reboot"
+msgstr "Enable Password-less Reboot"

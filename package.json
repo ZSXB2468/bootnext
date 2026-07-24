@@ -1,6 +1,6 @@
 {
   "name": "bootnext",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "GNOME Shell extension to temporarily reboot into another OS using efibootmgr BootNext",
   "type": "module",
   "private": true,

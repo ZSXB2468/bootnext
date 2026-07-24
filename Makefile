@@ -1,6 +1,6 @@
 NAME=bootnext
 DOMAIN=local
-BRANCH=$(shell git rev-parse --abbrev-ref HEAD)
+BRANCH=$(shell git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "snapshot")
 
 .PHONY: all pack install install-manual clean compile-po
 
@@ -36,9 +36,8 @@ install: $(NAME)@$(DOMAIN).zip
 
 install-manual: $(NAME)@$(DOMAIN).zip
 	@[ -d ~/.local/share/gnome-shell/extensions ] || mkdir -p ~/.local/share/gnome-shell/extensions
-	@touch ~/.local/share/gnome-shell/extensions/$(NAME)@$(DOMAIN)
 	@rm -rf ~/.local/share/gnome-shell/extensions/$(NAME)@$(DOMAIN)
-	@mv dist ~/.local/share/gnome-shell/extensions/$(NAME)@$(DOMAIN)
+	@cp -r dist ~/.local/share/gnome-shell/extensions/$(NAME)@$(DOMAIN)
 	@glib-compile-schemas ~/.local/share/gnome-shell/extensions/$(NAME)@$(DOMAIN)/schemas/ 2>/dev/null || true
 	@echo "Extension installed (manual). Restart GNOME Shell (Alt+F2, r) to activate."
 

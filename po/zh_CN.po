@@ -37,12 +37,20 @@ msgid "UEFI Firmware Setup"
 msgstr "UEFI 固件设置"
 
 #: src/extension.ts
-msgid "(No EFI boot entries found)"
-msgstr "（未找到 EFI 启动项）"
+msgid "No boot entries"
+msgstr "无启动项"
+
+#: src/extension.ts
+msgid "efibootmgr error"
+msgstr "efibootmgr 错误"
 
 #: src/extension.ts
 msgid "Restart to…"
 msgstr "重启到…"
+
+#: src/extension.ts
+msgid "efibootmgr not found"
+msgstr "未找到 efibootmgr"
 
 #: src/prefs.ts
 msgid "General"
@@ -57,9 +65,21 @@ msgid "Hide boot entries from the menu"
 msgstr "在菜单中隐藏启动项"
 
 #: src/prefs.ts
-msgid "No EFI boot entries found"
-msgstr "未找到 EFI 启动项"
+msgid "Failed to list boot entries"
+msgstr "读取启动项失败"
 
 #: src/prefs.ts
-msgid "Make sure efibootmgr is installed."
-msgstr "请确认已安装 efibootmgr。"
+msgid "Could not read EFI boot entries. Check permissions or run efibootmgr manually."
+msgstr "无法读取 EFI 启动项，请检查权限或手动运行 efibootmgr。"
+
+#: src/prefs.ts
+msgid "Password-less Reboot"
+msgstr "免密重启"
+
+#: src/prefs.ts
+msgid "Skip the password prompt when switching OS. Installs a polkit rule that allows efibootmgr --bootnext without authentication."
+msgstr "切换系统时跳过密码验证。安装一条 polkit 规则，允许 efibootmgr --bootnext 不经认证执行。"
+
+#: src/prefs.ts
+msgid "Enable Password-less Reboot"
+msgstr "启用免密重启"
